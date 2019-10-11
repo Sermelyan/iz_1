@@ -4,7 +4,7 @@ Copyright 2019 Сергей Меликян АПО-12
 #include "../include/blank_pack.h"
 
 int main() {
-    FILE* f = fopen("a.txt", "r");
+    FILE* f = fopen("../a.txt", "r");
     Blank_pack *packs = get_packs(f, stdout);
     if (!packs)
         return 1;

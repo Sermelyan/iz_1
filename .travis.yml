@@ -1,1 +1,11 @@
 language: c
+
+os: linux
+
+compiler: gcc
+
+script:
+    - mkdir build
+    - cd build
+    - cmake ../
+    - make

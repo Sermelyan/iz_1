@@ -15,7 +15,6 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED 17)
 
-set(COMPILE_FLAGS="-fprofile-arcs -ftest-coverage")
 include_directories(include)
 
 add_executable(idz_1 src/main.c src/blank.c src/blank_array.c src/blank_pack.c)

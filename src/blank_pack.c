@@ -9,7 +9,7 @@ Blank_pack* new_blank_pack(size_t n) {
     return temp;
 }
 
-void free_blank_pack(Blank_pack* pack) {
+void free_blank_pack(Blank_pack *pack) {
     for (Blank_pack *i = pack, *n = pack->next; i;) {
         free_blank_array_full(i->blanks);
         free(i);
@@ -19,13 +19,15 @@ void free_blank_pack(Blank_pack* pack) {
     }
 }
 
+//  Compare function of 2 blancks for sort algorithm
 int is_less(Blank *left, Blank *right) {
     return left->number < right->number;
 }
 
+//  Merge sort algorithm adapted for blanks sorting
 Blank** merge_sort(Blank **up, Blank **down,
                    size_t left, size_t right,
-                   int compare(Blank* , Blank*)) {
+                   int compare(Blank *, Blank *)) {
     if (left == right) {
         down[left] = up[left];
         return down;
@@ -59,6 +61,7 @@ Blank** merge_sort(Blank **up, Blank **down,
     return target;
 }
 
+//  Find right border of pack
 size_t find_right(Blank **a, size_t left, size_t size) {
     if (left == size)
         return size + 1;
@@ -77,15 +80,16 @@ size_t find_right(Blank **a, size_t left, size_t size) {
     return i;
 }
 
-Blank_pack* get_packs(FILE* in, FILE* out) {
-    Blank_array* blanks = get_blanks(in, out);
+// Get packs from file in, write data in out if in == stdin
+Blank_pack* get_packs(FILE *in, FILE *out) {
+    Blank_array *blanks = get_blanks(in, out);
     size_t size = blanks->size;
     Blank **temp = calloc(size, sizeof(Blank *));
     if (!temp) {
         free_blank_array_full(blanks);
         return NULL;
     }
-    Blank **result = merge_sort(blanks->array, temp, 0, size -1, is_less);
+    Blank **result = merge_sort(blanks->array, temp, 0, size - 1, is_less);
 
     size_t left = 0;
     size_t right = find_right(result, left, size);
@@ -124,7 +128,8 @@ Blank_pack* get_packs(FILE* in, FILE* out) {
     return packs;
 }
 
-void print_packs(FILE* out, Blank_pack* packs) {
+// Print packs in out
+void print_packs(FILE *out, Blank_pack *packs) {
     unsigned long p_i = 1;
     for (Blank_pack *i = packs, *n = packs->next; i;) {
         fprintf(out, "Pack number %lu:\n", p_i++);

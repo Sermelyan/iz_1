@@ -13,7 +13,7 @@
 
 #define MAXSTR 256
 #define check_and_print(out, str)\
-        if (out == stdout) {\
+        if (in == stdin) {\
             printf("%s", str);\
         }
 
@@ -26,9 +26,9 @@ typedef struct blank_struct {
 
 Blank* new_blank(void);
 int check_string(const char *str);
-int check_blank(Blank* blank);
-void get_string(FILE* in, char* str);
-Blank* get_blank(FILE* in, FILE* out);
+int check_blank(Blank *blank);
+void get_string(FILE *in, char *str);
+Blank* get_blank(FILE *in, FILE *out);
 void print_blank(FILE *out, Blank *bl);
 
 #endif  //  INCLUDE_BLANK_H_

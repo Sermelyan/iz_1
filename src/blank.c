@@ -55,13 +55,13 @@ Blank* get_blank(FILE* in, FILE* out) {
     if (!temp)
         return NULL;
 
-    check_and_print(out, "Enter blank number: ");
+    check_and_print(in, "Enter blank number: ");
     fscanf(in, "%lu;", &(temp->number));
-    check_and_print(out, "Enter storage place: ");
+    check_and_print(in, "Enter storage place: ");
     get_string(in, temp->storage_place);
-    check_and_print(out, "Enter responsible name: ");
+    check_and_print(in, "Enter responsible name: ");
     get_string(in, temp->responsible_name);
-    check_and_print(out, "Enter responsible surname: ");
+    check_and_print(in, "Enter responsible surname: ");
     get_string(in, temp->responsible_surname);
 
     if (check_blank(temp)) {
@@ -74,7 +74,7 @@ Blank* get_blank(FILE* in, FILE* out) {
 
 // Print blank in output
 void print_blank(FILE *out, Blank *bl) {
-    fprintf(out, "number: %lu, storage: %s, responsible: %s %s\n",
+    fprintf(out, "number: %lu; storage: %s; responsible: %s %s\n",
             bl->number, bl->storage_place, bl->responsible_name,
             bl->responsible_surname);
 }

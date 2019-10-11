@@ -9,6 +9,7 @@ before_install:
   - sudo apt-get install cppcheck -y
   - sudo apt-get install python2.7 -y
   - sudo apt-get install valgrind -y
+  - sudo apt-get install libgtest-dev
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -q
   - sudo apt-get install gcc-9 -y
@@ -29,4 +30,5 @@ script:
     - cd build
     - cmake ../
     - make
-    - valgrind --tool=memcheck --gen-suppressions=all --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ./idz_1
+    - ./Test
+    - valgrind --tool=memcheck --gen-suppressions=all --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ./idz_1 -i "../a.txt"

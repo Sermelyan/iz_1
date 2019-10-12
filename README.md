@@ -1,1 +1,1 @@
-# iz_1
+# Texnopark c/c++ homeworks repo

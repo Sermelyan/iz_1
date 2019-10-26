@@ -6,14 +6,15 @@ Copyright 2019 Сергей Меликян АПО-12
 #include <stdlib.h>
 #include <string.h>
 
-Object* new_object(void) {
-    return calloc(1, sizeof(Object));
-}
+#define MAX_USR 50000000
+#define MAX_OBJ 25000
 
 Object* create_object(unsigned id) {
-    Object* temp = new_object();
-    if (!temp)
+    Object* temp = calloc(1, sizeof(Object));;
+    if (!temp || id >= MAX_OBJ){
+        free_object(temp);
         return NULL;
+    }
     temp->obj_id = id;
     return temp;
 }
@@ -25,7 +26,10 @@ void free_object(Object* object) {
         free(object->rating_array);
 }
 
-int add_rate(Object* obj, Mark m, unsigned user_id) {
+int add_rate(Object* obj, int m, unsigned user_id) {
+    if (!obj || m == NOT_MARKED || user_id >= MAX_USR) {
+        return 1;
+    }
     unsigned size = obj->rate_size;
     unsigned pointer = obj->rate_ptr;
     Rate *array = obj->rating_array;
@@ -58,6 +62,8 @@ int add_rate(Object* obj, Mark m, unsigned user_id) {
 }
 
 Objects *create_objects(unsigned size) {
+    if (size >= MAX_OBJ)
+        return NULL;
     Objects* temp = calloc(1, sizeof(Objects));
     if (!temp)
         return NULL;

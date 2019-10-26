@@ -6,6 +6,19 @@ Copyright 2019 Сергей Меликян АПО-12
 #include <stdlib.h>
 #include <stdio.h>
 
+#define MAX_USR 50000000
+#define MAX_OBJ 25000
+
+User* create_user(unsigned id) {
+    User* temp = calloc(1, sizeof(User));;
+    if (!temp || id >= MAX_USR) {
+        free_user(temp);
+        return NULL;
+    }
+    temp->user_id = id;
+    return temp;
+}
+
 void free_user(User* user) {
     if (!user)
         return;
@@ -14,6 +27,9 @@ void free_user(User* user) {
 }
 
 int add_marked_obj(User* usr, unsigned obj_id) {
+    if (!usr || obj_id > MAX_OBJ) {
+        return 1;
+    }
     unsigned size = usr->mark_size;
     unsigned pointer = usr->mark_ptr;
     unsigned *array = usr->marked_obj;
@@ -51,6 +67,8 @@ int add_marked_obj(User* usr, unsigned obj_id) {
 }
 
 Users *create_users(unsigned size) {
+    if (size >= MAX_USR)
+        return NULL;
     Users* temp = calloc(1, sizeof(Users));
     if (!temp)
         return NULL;

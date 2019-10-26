@@ -12,7 +12,7 @@ Copyright 2019 Сергей Меликян АПО-12
 #define MAX_RATE 750000000
 
 Users* gen_users(unsigned size) {
-    if (size > MAX_USR)
+    if (size >= MAX_USR)
         return NULL;
     Users *temp =  create_users(size);
     User *arr = temp->array;
@@ -23,7 +23,7 @@ Users* gen_users(unsigned size) {
 }
 
 Objects* gen_objects(unsigned size) {
-    if (size > MAX_OBJ)
+    if (size >= MAX_OBJ)
         return NULL;
     Objects *temp =  create_objects(size);
     Object *arr = temp->array;

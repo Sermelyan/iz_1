@@ -13,9 +13,43 @@ extern "C" {
     #include "top_utils.h"
     #include "top_single.h"
     #include "object.h"
+    #include "user.h"
 }
 
 #define MAX_THREAD std::thread::hardware_concurrency()
+#define MAX_USR 50000000
+#define MAX_OBJ 25000
+#define MAX_RATE 750000000
+
+class TopObjectUser: public ::testing::Test {
+ public:
+    void SetUp() {
+        u = (User*) calloc(1, sizeof(User));
+        o = (Object*) calloc(1, sizeof(Object));
+    }
+    void TearDown() {
+        free_object(o);
+        free_user(u);
+    }
+
+ protected:
+    User *u;
+    Object *o;
+};
+
+TEST_F(TopObjectUser, TestLimits) {
+    ASSERT_TRUE(add_marked_obj(NULL, 0));
+    ASSERT_TRUE(add_marked_obj(u, MAX_USR + 1));
+    ASSERT_TRUE(add_rate(NULL, ONE, 0));
+    ASSERT_TRUE(add_rate(o, ONE, MAX_USR + 1));
+    ASSERT_TRUE(add_rate(o, NOT_MARKED, 0));
+    ASSERT_TRUE(!create_user(MAX_USR + 1));
+    ASSERT_TRUE(!create_object(MAX_OBJ + 1));
+    ASSERT_TRUE(!create_users(MAX_USR + 1));
+    ASSERT_TRUE(!create_objects(MAX_OBJ + 1));
+    ASSERT_TRUE(!gen_users(MAX_USR + 1));
+    ASSERT_TRUE(!gen_objects(MAX_OBJ + 1));
+}
 
 class TopUtils: public ::testing::Test {};
 

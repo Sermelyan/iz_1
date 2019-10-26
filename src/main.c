@@ -38,22 +38,19 @@ int main() {
 
 
     Top *top = get_top(objects, &(users->array[0]), 10);
-    if (top) {
-        free(top);
-    } else {
+    if (!top) {
         perror("Error on single get_top\n");
     }
 
-    top = (*get_top_multi) (objects, &(users->array[0]), 10);
-    if (top) {
-        free(top);
-    } else {
+    Top* top_multi = (*get_top_multi) (objects, &(users->array[0]), 10);
+    if (!top_multi) {
         perror("Error on multi get_top\n");
     }
 
+    free(top);
+    free(top_multi);
     free_users(users);
     free_objects(objects);
-    free(get_top_multi);
     dlclose(library);
     return 0;
 }

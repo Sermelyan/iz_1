@@ -14,7 +14,7 @@ typedef struct top {
 
 void sift_down(Top *arr, long i, unsigned size);
 void make_heap(Top *arr, unsigned size);
-Top extract_max(Top *arr, unsigned *size);
+Top extract_max(Top *arr, unsigned size);
 Top* find_top(Top * temp, unsigned size, unsigned count);
 double get_average(const Object *obj);
 void print_top(Top *top, unsigned size);

@@ -29,10 +29,10 @@ void make_heap(Top *arr, unsigned size) {
     }
 }
 
-Top extract_max(Top *arr, unsigned *size) {
+Top extract_max(Top *arr, unsigned size) {
     Top result = arr[0];
-    arr[0] = arr[--*size];
-    sift_down(arr, 0, *size);
+    arr[0] = arr[--size];
+    sift_down(arr, 0, size);
     return result;
 }
 
@@ -43,8 +43,8 @@ Top* find_top(Top * temp, unsigned size, unsigned count) {
 
     make_heap(temp, size);
 
-    for (unsigned i = 0; i < count; i++) {
-        t_top[i] = extract_max(temp, &size);
+    for (unsigned i = 0, len = size; i < count; i++, len--) {
+        t_top[i] = extract_max(temp, len);
     }
 
     return t_top;

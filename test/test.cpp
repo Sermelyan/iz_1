@@ -39,7 +39,7 @@ TEST_F(TopUtils, TestHeap) {
     make_heap(arr, 5);
     unsigned size = 5;
     for (size_t i = 0; i < 5; i++) {
-        Top temp = extract_max(arr, &size);
+        Top temp = extract_max(arr, size--);
         ASSERT_TRUE(temp.avr_rate == etalon[i].avr_rate);
         ASSERT_TRUE(temp.obj_id == etalon[i].obj_id);
     }
@@ -99,11 +99,11 @@ TEST_F(TopTest, testTops) {
     ASSERT_TRUE(objects);
 
     auto start = clock();
-    auto flag = make_random_rate(users, objects, 500000000, MAX_THREAD - 1);
+    auto flag = make_random_rate(users, objects, 500000000, 2);
     auto fin = clock();
     ASSERT_TRUE(!flag);
     std::cout << "Generation time: "
-              << (double) (fin - start)/CLOCKS_PER_SEC/(MAX_THREAD - 1)
+              << (double) (fin - start)/CLOCKS_PER_SEC/2
               << std::endl;
 
     start = clock();

@@ -11,7 +11,7 @@ Copyright 2019 Сергей Меликян АПО-12
 
 Object* create_object(unsigned id) {
     Object* temp = calloc(1, sizeof(Object));;
-    if (!temp || id >= MAX_OBJ){
+    if (!temp || id >= MAX_OBJ) {
         free_object(temp);
         return NULL;
     }

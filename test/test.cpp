@@ -22,22 +22,15 @@ extern "C" {
 #define MAX_RATE 750000000
 
 class TopObjectUser: public ::testing::Test {
- public:
-    void SetUp() {
-        u = (User*) calloc(1, sizeof(User));
-        o = (Object*) calloc(1, sizeof(Object));
-    }
-    void TearDown() {
-        free_object(o);
-        free_user(u);
-    }
-
  protected:
     User *u;
     Object *o;
 };
 
 TEST_F(TopObjectUser, TestLimits) {
+    u = (User*) calloc(1, sizeof(User));
+    o = (Object*) calloc(1, sizeof(Object));
+
     ASSERT_TRUE(add_marked_obj(NULL, 0));
     ASSERT_TRUE(add_marked_obj(u, MAX_USR + 1));
     ASSERT_TRUE(add_rate(NULL, ONE, 0));
@@ -49,6 +42,9 @@ TEST_F(TopObjectUser, TestLimits) {
     ASSERT_TRUE(!create_objects(MAX_OBJ + 1));
     ASSERT_TRUE(!gen_users(MAX_USR + 1));
     ASSERT_TRUE(!gen_objects(MAX_OBJ + 1));
+
+    free_object(o);
+    free_user(u);
 }
 
 class TopUtils: public ::testing::Test {};

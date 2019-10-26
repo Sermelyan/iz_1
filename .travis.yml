@@ -1,3 +1,4 @@
+ 
 language: c
 
 os: linux
@@ -11,7 +12,8 @@ before_install:
   - sudo apt-get install valgrind -y
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -q
-  - sudo apt-get install gcc-9 -y
+  - sudo apt-get install g++-9 -y
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 90
   - CMAKE_VERSION=3.15.4
   - CMAKE_VERSION_DIR=v3.15
   - CMAKE_OS=Linux-x86_64
@@ -29,4 +31,5 @@ script:
     - cd build
     - cmake ../
     - make
-    - valgrind --tool=memcheck --gen-suppressions=all --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ./idz_1
+    - ./Test
+    - valgrind --tool=memcheck --gen-suppressions=all --leak-check=full --leak-resolution=med --track-origins=yes --vgdb=no ./main

@@ -81,7 +81,7 @@ void* thread_worker(void* args) {
 
     unsigned seed = clock();
     for (unsigned user = 0; user < u_size; user++) {
-        for (size_t j = 0; j < m_per_us; j++) {
+        for (unsigned j = 0; j < m_per_us; j++) {
             unsigned object = ((user + j + 1) * 2654435769) % o_size;
             if (add_rate(&o_arr[object], ( (7*object*user+29) * seed >> 12) % 5 + 1, user)) {
                 a->result = 1;

@@ -1,22 +1,18 @@
-//
-// Created by ser on 19.10.2019.
-//
 
-#include "utils.h"
+extern "C" {
 #include "top_single.h"
-#include <stdio.h>
-#include <stdlib.h>
+    #include "utils.h"
+}
 #include <dlfcn.h>
+#include <stdlib.h>
 
 int main() {
     Users *users = gen_users(5000);
     if (!users) {
-        perror("Cant get Users");
         return 1;
     }
     Objects *objects = gen_objects(160);
     if (!objects) {
-        perror("Cant get Objects\n");
         free_users(users);
         return 1;
     }
@@ -31,24 +27,19 @@ int main() {
     Top* (*get_top_multi)(const Objects *o, const User *u, unsigned c);
     library = dlopen("./libtop_multi.so", RTLD_LAZY);
     if (!library) {
-        perror("Cant open lib\n");
         return 1;
     }
-    get_top_multi = dlsym(library, "get_top");
+    get_top_multi = (Top* (*)(const Objects*, const User*, unsigned int)) dlsym(library, "get_top");
 
 
     Top *top = get_top(objects, &(users->array[0]), 10);
-    if (!top) {
-        perror("Error on single get_top\n");
-    }
+
 
     Top* top_multi = (*get_top_multi) (objects, &(users->array[0]), 10);
-    if (!top_multi) {
-        perror("Error on multi get_top\n");
-    }
 
     free(top);
     free(top_multi);
+
     free_users(users);
     free_objects(objects);
     dlclose(library);

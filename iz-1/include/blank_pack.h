@@ -2,8 +2,8 @@
 // Created by ser on 10.10.2019.
 //
 
-#ifndef INCLUDE_BLANK_PACK_H_
-#define INCLUDE_BLANK_PACK_H_
+#ifndef IZ_1_INCLUDE_BLANK_PACK_H_
+#define IZ_1_INCLUDE_BLANK_PACK_H_
 
 #include "blank_array.h"
 
@@ -22,4 +22,4 @@ size_t find_right(Blank **a, size_t left, size_t size);
 Blank_pack* get_packs(FILE *in, FILE *out);
 void print_packs(FILE *out, Blank_pack *packs);
 
-#endif  //  INCLUDE_BLANK_PACK_H_
+#endif  //  IZ_1_INCLUDE_BLANK_PACK_H_

@@ -2,8 +2,8 @@
 // Created by ser on 10.10.2019.
 //
 
-#ifndef INCLUDE_BLANK_H_
-#define INCLUDE_BLANK_H_
+#ifndef IZ_1_INCLUDE_BLANK_H_
+#define IZ_1_INCLUDE_BLANK_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,4 +31,4 @@ void get_string(FILE *in, char *str);
 Blank* get_blank(FILE *in, FILE *out);
 void print_blank(FILE *out, Blank *bl);
 
-#endif  //  INCLUDE_BLANK_H_
+#endif  //  IZ_1_INCLUDE_BLANK_H_

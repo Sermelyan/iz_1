@@ -2,8 +2,8 @@
 // Created by ser on 10.10.2019.
 //
 
-#ifndef INCLUDE_BLANK_ARRAY_H_
-#define INCLUDE_BLANK_ARRAY_H_
+#ifndef IZ_1_INCLUDE_BLANK_ARRAY_H_
+#define IZ_1_INCLUDE_BLANK_ARRAY_H_
 
 #include "blank.h"
 
@@ -17,4 +17,4 @@ void free_blank_array_full(Blank_array *blank_array);
 void free_blank_array(Blank_array *blank_array);
 Blank_array* get_blanks(FILE *in, FILE *out);
 
-#endif  //  INCLUDE_BLANK_ARRAY_H_
+#endif  //  IIZ_1_NCLUDE_BLANK_ARRAY_H_

@@ -127,14 +127,14 @@ TEST_F(TopTest, testTops) {
     library = dlopen("./libtop_multi.so", RTLD_LAZY);
     ASSERT_TRUE(library);
     get_top_multi = (Top *(*)(const Objects *, const User *, unsigned int)) (dlsym(library, "get_top"));
-    Users *users = gen_users(5000);
+    Users *users = gen_users(5000000);
     ASSERT_TRUE(users);
-    Objects *objects = gen_objects(160);
+    Objects *objects = gen_objects(16000);
     ASSERT_TRUE(objects);
     unsigned thr_count = MAX_THREAD > 2 ? MAX_THREAD -1 : MAX_THREAD;
     std::cout << "Generate with threads: " << thr_count << std::endl;
     auto start = clock();
-    auto flag = make_random_rate(users, objects, 50000, thr_count);
+    auto flag = make_random_rate(users, objects, 500000000, thr_count);
     auto fin = clock();
     ASSERT_TRUE(!flag);
     std::cout << "Generation time: "

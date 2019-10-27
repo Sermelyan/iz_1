@@ -1,5 +1,6 @@
-# iz_1
+# Texnopark c/c++ homeworks repo
 
+# iz_1
 [![Build Status](https://travis-ci.org/Sermelyan/texnopark_c-cpp.svg?branch=making-iz-1)](https://travis-ci.org/Sermelyan/texnopark_c-cpp)
 
 # Description

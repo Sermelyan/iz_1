@@ -2,8 +2,8 @@
 Copyright 2019 Сергей Меликян АПО-12
 */
 
-#ifndef INCLUDE_TOP_UTILS_H_
-#define INCLUDE_TOP_UTILS_H_
+#ifndef IDZ_2_INCLUDE_TOP_UTILS_H_
+#define IDZ_2_INCLUDE_TOP_UTILS_H_
 
 #include "utils.h"
 
@@ -22,4 +22,4 @@ int bin_search(const unsigned *arr,
                unsigned first, unsigned right,
                unsigned element);
 
-#endif  //  INCLUDE_TOP_UTILS_H_
+#endif  //  IDZ_2_INCLUDE_TOP_UTILS_H_

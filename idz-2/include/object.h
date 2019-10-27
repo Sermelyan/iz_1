@@ -2,8 +2,8 @@
 Copyright 2019 Сергей Меликян АПО-12
 */
 
-#ifndef INCLUDE_OBJECT_H_
-#define INCLUDE_OBJECT_H_
+#ifndef IDZ_2_INCLUDE_OBJECT_H_
+#define IDZ_2_INCLUDE_OBJECT_H_
 
 typedef enum mark {
     NOT_MARKED,
@@ -38,4 +38,4 @@ int add_rate(Object* obj, int m, unsigned user_id);
 Objects *create_objects(unsigned size);
 void free_objects(Objects *objs);
 
-#endif  //  INCLUDE_OBJECT_H_
+#endif  //  IDZ_2_INCLUDE_OBJECT_H_

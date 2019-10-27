@@ -2,8 +2,8 @@
 Copyright 2019 Сергей Меликян АПО-12
 */
 
-#ifndef INCLUDE_USER_H_
-#define INCLUDE_USER_H_
+#ifndef IDZ_2_INCLUDE_USER_H_
+#define IDZ_2_INCLUDE_USER_H_
 
 typedef struct user {
     unsigned user_id;
@@ -24,4 +24,4 @@ typedef struct user_array {
 Users *create_users(unsigned size);
 void free_users(Users *users);
 
-#endif  //  INCLUDE_USER_H_
+#endif  //  IDZ_2_INCLUDE_USER_H_

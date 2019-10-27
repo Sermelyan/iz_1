@@ -17,4 +17,4 @@ void free_blank_array_full(Blank_array *blank_array);
 void free_blank_array(Blank_array *blank_array);
 Blank_array* get_blanks(FILE *in, FILE *out);
 
-#endif  //  IIZ_1_NCLUDE_BLANK_ARRAY_H_
+#endif  //  IZ_1_INCLUDE_BLANK_ARRAY_H_

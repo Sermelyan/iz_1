@@ -32,5 +32,5 @@ target_link_libraries(main utils top_single dl)
 add_executable(Test test/test.cpp)
 target_link_libraries(Test gtest_main top_single utils dl)
 
-add_executable(test src/test.cpp)
-target_link_libraries(test utils top_single dl)
+add_executable(mem_test test/mem_test.cpp)
+target_link_libraries(mem_test utils top_single dl)

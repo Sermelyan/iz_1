@@ -25,6 +25,7 @@ before_install:
   - export PATH=$CMAKE_DIR/bin:$PATH
 
 script:
+    - cd iz-1
     - ./linters/run.sh --local
     - mkdir build
     - cd build

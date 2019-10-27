@@ -1,6 +1,6 @@
 # iz_1
 
-[![Build Status](https://travis-ci.org/Sermelyan/iz_1.svg?branch=making-iz-1)](https://travis-ci.org/Sermelyan/iz_1)
+[![Build Status](https://travis-ci.org/Sermelyan/texnopark_c-cpp.svg?branch=making-iz-1)](https://travis-ci.org/Sermelyan/texnopark_c-cpp)
 
 # Description
     Создать структуру для хранения информации 

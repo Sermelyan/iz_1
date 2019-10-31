@@ -23,7 +23,7 @@ typedef struct object {
     unsigned obj_id;
     unsigned rate_size;
     unsigned rate_ptr;
-    Rate* rating_array;
+    Rate *rating_array;
 } __attribute__((packed)) Object;
 
 typedef struct object_array {
@@ -32,10 +32,10 @@ typedef struct object_array {
 } Objects;
 
 Object* create_object(unsigned id);
-void free_object(Object* object);
-int add_rate(Object* obj, int m, unsigned user_id);
+void free_object(Object *object);
+int add_rate(Object *obj, int m, unsigned user_id);
 
-Objects *create_objects(unsigned size);
+Objects* create_objects(unsigned size);
 void free_objects(Objects *objs);
 
 #endif  //  IDZ_2_INCLUDE_OBJECT_H_

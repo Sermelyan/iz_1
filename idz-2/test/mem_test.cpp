@@ -1,3 +1,6 @@
+/*
+Copyright 2019 Сергей Меликян АПО-12
+*/
 
 extern "C" {
     #include "top_single.h"
@@ -5,6 +8,7 @@ extern "C" {
 }
 #include <dlfcn.h>
 #include <stdlib.h>
+#include <iostream>
 
 int main() {
     Users *users = gen_users(5000);
@@ -27,15 +31,19 @@ int main() {
     Top* (*get_top_multi)(const Objects *o, const User *u, unsigned c);
     library = dlopen("./libtop_multi.so", RTLD_LAZY);
     if (!library) {
+        std::cerr << "Cant open lib libtop_multi.so" << std::endl;
         return 1;
     }
     get_top_multi = (Top* (*)(const Objects*, const User*, unsigned int)) dlsym(library, "get_top");
-
+    if (dlerror() != NULL) {
+        std::cerr << "Cant find function in library" << std::endl;
+        return 1;
+    }
 
     Top *top = get_top(objects, &(users->array[0]), 10);
 
 
-    Top* top_multi = (*get_top_multi) (objects, &(users->array[0]), 10);
+    Top *top_multi = (*get_top_multi) (objects, &(users->array[0]), 10);
 
     free(top);
     free(top_multi);

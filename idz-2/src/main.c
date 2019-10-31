@@ -1,6 +1,6 @@
-//
-// Created by ser on 19.10.2019.
-//
+/*
+Copyright 2019 Сергей Меликян АПО-12
+*/
 
 #include "utils.h"
 #include "top_single.h"
@@ -31,18 +31,21 @@ int main() {
     Top* (*get_top_multi)(const Objects *o, const User *u, unsigned c);
     library = dlopen("./libtop_multi.so", RTLD_LAZY);
     if (!library) {
-        perror("Cant open lib\n");
+        perror("Cant open lib libtop_multi.so\n");
         return 1;
     }
     get_top_multi = dlsym(library, "get_top");
-
+    if (dlerror() != NULL) {
+        perror("Cant find function in library\n");
+        return 1;
+    }
 
     Top *top = get_top(objects, &(users->array[0]), 10);
     if (!top) {
         perror("Error on single get_top\n");
     }
 
-    Top* top_multi = (*get_top_multi) (objects, &(users->array[0]), 10);
+    Top *top_multi = (*get_top_multi) (objects, &(users->array[0]), 10);
     if (!top_multi) {
         perror("Error on multi get_top\n");
     }

@@ -17,7 +17,7 @@ void make_heap(Top *arr, unsigned size);
 Top extract_max(Top *arr, unsigned size);
 Top* find_top(Top * temp, unsigned size, unsigned count);
 double get_average(const Object *obj);
-void print_top(Top *top, unsigned size);
+void print_top(const Top *top, unsigned size);
 int bin_search(const unsigned *arr,
                unsigned first, unsigned right,
                unsigned element);

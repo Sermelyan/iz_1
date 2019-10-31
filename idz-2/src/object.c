@@ -10,7 +10,7 @@ Copyright 2019 Сергей Меликян АПО-12
 #define MAX_OBJ 25000
 
 Object* create_object(unsigned id) {
-    Object* temp = calloc(1, sizeof(Object));;
+    Object *temp = calloc(1, sizeof(Object));;
     if (!temp || id >= MAX_OBJ) {
         free_object(temp);
         return NULL;
@@ -19,14 +19,14 @@ Object* create_object(unsigned id) {
     return temp;
 }
 
-void free_object(Object* object) {
+void free_object(Object *object) {
     if (!object)
         return;
     if (object->rating_array)
         free(object->rating_array);
 }
 
-int add_rate(Object* obj, int m, unsigned user_id) {
+int add_rate(Object *obj, int m, unsigned user_id) {
     if (!obj || m == NOT_MARKED || user_id >= MAX_USR) {
         return 1;
     }
@@ -61,10 +61,10 @@ int add_rate(Object* obj, int m, unsigned user_id) {
     return 0;
 }
 
-Objects *create_objects(unsigned size) {
+Objects* create_objects(unsigned size) {
     if (size >= MAX_OBJ)
         return NULL;
-    Objects* temp = calloc(1, sizeof(Objects));
+    Objects *temp = calloc(1, sizeof(Objects));
     if (!temp)
         return NULL;
     temp->size = size;

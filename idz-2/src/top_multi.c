@@ -71,7 +71,7 @@ Top* prepare_answer(Thr_args *t, unsigned size) {
     return ret;
 }
 
-Top* get_top(Objects *objs, User *user, unsigned count) {
+Top* get_top(const Objects *objs, const User *user, unsigned count) {
     unsigned o_size = objs->size;
     if (count > o_size)
         return NULL;

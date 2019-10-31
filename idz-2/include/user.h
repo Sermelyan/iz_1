@@ -13,8 +13,8 @@ typedef struct user {
 } __attribute__((packed)) User;
 
 User* create_user(unsigned id);
-void free_user(User* user);
-int add_marked_obj(User* usr, unsigned obj_id);
+void free_user(User *user);
+int add_marked_obj(User *usr, unsigned obj_id);
 
 typedef struct user_array {
     User *array;

@@ -36,7 +36,7 @@ Top extract_max(Top *arr, unsigned size) {
     return result;
 }
 
-Top* find_top(Top * temp, unsigned size, unsigned count) {
+Top* find_top(Top *temp, unsigned size, unsigned count) {
     Top *t_top = calloc(count, sizeof(Top));
     if (!t_top)
         return NULL;
@@ -72,7 +72,7 @@ double get_average(const Object *obj) {
     return (acc0 + acc1 + acc2 + acc3) / size;
 }
 
-void print_top(Top *top, unsigned size) {
+void print_top(const Top *top, unsigned size) {
     printf("***************Top*****************\n");
     for (unsigned i = 0; i < size; i++) {
         printf("object id: %u\n", top[i].obj_id);

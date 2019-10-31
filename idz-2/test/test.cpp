@@ -21,13 +21,9 @@ extern "C" {
 #define MAX_OBJ 25000
 #define MAX_RATE 750000000
 
-class TopObjectUser: public ::testing::Test {
- protected:
+TEST(TopObjectUser, TestLimits) {
     User *u;
     Object *o;
-};
-
-TEST_F(TopObjectUser, TestLimits) {
     u = (User*) calloc(1, sizeof(User));
     o = (Object*) calloc(1, sizeof(Object));
 
@@ -36,20 +32,20 @@ TEST_F(TopObjectUser, TestLimits) {
     ASSERT_TRUE(add_rate(NULL, ONE, 0));
     ASSERT_TRUE(add_rate(o, ONE, MAX_USR + 1));
     ASSERT_TRUE(add_rate(o, NOT_MARKED, 0));
-    ASSERT_TRUE(!create_user(MAX_USR + 1));
-    ASSERT_TRUE(!create_object(MAX_OBJ + 1));
-    ASSERT_TRUE(!create_users(MAX_USR + 1));
-    ASSERT_TRUE(!create_objects(MAX_OBJ + 1));
-    ASSERT_TRUE(!gen_users(MAX_USR + 1));
-    ASSERT_TRUE(!gen_objects(MAX_OBJ + 1));
+
+    ASSERT_FALSE(create_user(MAX_USR + 1));
+    ASSERT_FALSE(create_object(MAX_OBJ + 1));
+    ASSERT_FALSE(create_users(MAX_USR + 1));
+    ASSERT_FALSE(create_objects(MAX_OBJ + 1));
+
+    ASSERT_FALSE(gen_users(MAX_USR + 1));
+    ASSERT_FALSE(gen_objects(MAX_OBJ + 1));
 
     free_object(o);
     free_user(u);
 }
 
-class TopUtils: public ::testing::Test {};
-
-TEST_F(TopUtils, TestHeap) {
+TEST(TopUtils, TestHeap) {
     Top arr[5] = {
         {1, 0},
         {3.5, 2},
@@ -70,26 +66,26 @@ TEST_F(TopUtils, TestHeap) {
     unsigned size = 5;
     for (size_t i = 0; i < 5; i++) {
         Top temp = extract_max(arr, size--);
-        ASSERT_TRUE(temp.avr_rate == etalon[i].avr_rate);
-        ASSERT_TRUE(temp.obj_id == etalon[i].obj_id);
+        ASSERT_EQ(temp.avr_rate, etalon[i].avr_rate);
+        ASSERT_EQ(temp.obj_id, etalon[i].obj_id);
     }
 }
 
-TEST_F(TopUtils, TestGetAverage) {
+TEST(TopUtils, TestGetAverage) {
     Object *objs = create_object(0);
     ASSERT_TRUE(objs);
 
-    ASSERT_TRUE(!add_rate(objs, static_cast<Mark>(5), 0));
-    ASSERT_TRUE(!add_rate(objs, static_cast<Mark>(4), 0));
-    ASSERT_TRUE(!add_rate(objs, static_cast<Mark>(3), 0));
-    ASSERT_TRUE(!add_rate(objs, static_cast<Mark>(2), 0));
-    ASSERT_TRUE(!add_rate(objs, static_cast<Mark>(1), 0));
+    ASSERT_FALSE(add_rate(objs, static_cast<Mark>(5), 0));
+    ASSERT_FALSE(add_rate(objs, static_cast<Mark>(4), 0));
+    ASSERT_FALSE(add_rate(objs, static_cast<Mark>(3), 0));
+    ASSERT_FALSE(add_rate(objs, static_cast<Mark>(2), 0));
+    ASSERT_FALSE(add_rate(objs, static_cast<Mark>(1), 0));
 
     ASSERT_EQ(get_average(objs), 3.0);
     free_object(objs);
 }
 
-TEST_F(TopUtils, TestFindTop) {
+TEST(TopUtils, TestFindTop) {
     Top arr[5] = {
             {1, 0},
             {3.5, 2},
@@ -103,13 +99,13 @@ TEST_F(TopUtils, TestFindTop) {
     };
     Top *temp = find_top(arr, 5, 2);
     for (size_t i = 0; i < 2; i++) {
-        ASSERT_TRUE(temp[i].avr_rate == etalon[i].avr_rate);
-        ASSERT_TRUE(temp[i].obj_id == etalon[i].obj_id);
+        ASSERT_EQ(temp[i].avr_rate, etalon[i].avr_rate);
+        ASSERT_EQ(temp[i].obj_id, etalon[i].obj_id);
     }
     free(temp);
 }
 
-TEST_F(TopUtils, TestBinSearch) {
+TEST(TopUtils, TestBinSearch) {
     unsigned arr[10] = {
             0,1,2,3,4,5,6,7,8,9
     };
@@ -117,9 +113,7 @@ TEST_F(TopUtils, TestBinSearch) {
     ASSERT_EQ(bin_search(arr, 0, 10, 10), -1);
 }
 
-class TopTest: public ::testing::Test{};
-
-TEST_F(TopTest, testTops) {
+TEST(TopTest, testTops) {
     std::cout << "Max thread count: " << MAX_THREAD << std::endl;
 
     void *library;
@@ -127,10 +121,13 @@ TEST_F(TopTest, testTops) {
     library = dlopen("./libtop_multi.so", RTLD_LAZY);
     ASSERT_TRUE(library);
     get_top_multi = (Top *(*)(const Objects *, const User *, unsigned int)) (dlsym(library, "get_top"));
+    ASSERT_FALSE(dlerror());
+
     Users *users = gen_users(5000000);
     ASSERT_TRUE(users);
     Objects *objects = gen_objects(16000);
     ASSERT_TRUE(objects);
+    
     unsigned thr_count = MAX_THREAD > 2 ? MAX_THREAD -1 : MAX_THREAD;
     std::cout << "Generate with threads: " << thr_count << std::endl;
     auto start = clock();
@@ -161,7 +158,7 @@ TEST_F(TopTest, testTops) {
     print_top(top_single, 10);
 
     for (size_t i = 0; i < 10; i++) {
-        ASSERT_TRUE(top_multi[i].avr_rate == top_single[i].avr_rate);
+        ASSERT_EQ(top_multi[i].avr_rate, top_single[i].avr_rate);
     }
 
     free_objects(objects);

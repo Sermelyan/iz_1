@@ -10,7 +10,7 @@ Copyright 2019 Сергей Меликян АПО-12
 #define MAX_OBJ 25000
 
 User* create_user(unsigned id) {
-    User* temp = calloc(1, sizeof(User));;
+    User *temp = calloc(1, sizeof(User));;
     if (!temp || id >= MAX_USR) {
         free_user(temp);
         return NULL;
@@ -19,14 +19,14 @@ User* create_user(unsigned id) {
     return temp;
 }
 
-void free_user(User* user) {
+void free_user(User *user) {
     if (!user)
         return;
     if (user->marked_obj)
         free(user->marked_obj);
 }
 
-int add_marked_obj(User* usr, unsigned obj_id) {
+int add_marked_obj(User *usr, unsigned obj_id) {
     if (!usr || obj_id > MAX_OBJ) {
         return 1;
     }
@@ -69,7 +69,7 @@ int add_marked_obj(User* usr, unsigned obj_id) {
 Users *create_users(unsigned size) {
     if (size >= MAX_USR)
         return NULL;
-    Users* temp = calloc(1, sizeof(Users));
+    Users *temp = calloc(1, sizeof(Users));
     if (!temp)
         return NULL;
     temp->size = size;

@@ -69,7 +69,7 @@ typedef struct args {
     int result;
 } Thr_args;
 
-void* thread_worker(void* args) {
+void* thread_worker(void *args) {
     Thr_args *a = args;
 
     unsigned count = a->count;
